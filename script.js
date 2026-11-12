@@ -1,3 +1,35 @@
+function showSiteLoader() {
+  try {
+    if (sessionStorage.getItem('fc-loader-seen')) return;
+    sessionStorage.setItem('fc-loader-seen', '1');
+  } catch {
+    // The intro can still run when browser storage is unavailable.
+  }
+  const loader = document.createElement('div');
+  loader.className = 'site-loader';
+  loader.setAttribute('aria-hidden', 'true');
+  loader.innerHTML = '<img src="assets/images/logo.png" alt=""><span></span>';
+  document.body.prepend(loader);
+  const start = performance.now();
+  const minTime = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 450;
+  let closing = false;
+  function close() {
+    if (closing) return;
+    closing = true;
+    setTimeout(() => {
+      loader.classList.add('leaving');
+      setTimeout(() => loader.remove(), 350);
+    }, Math.max(0, minTime - (performance.now() - start)));
+  }
+  const firstImage = document.querySelector('.hero-bg') || loader.querySelector('img');
+  if (firstImage.decode) firstImage.decode().then(close, close);
+  else if (firstImage.complete) close();
+  else firstImage.addEventListener('load', close, { once: true });
+  setTimeout(close, 1400);
+}
+
+showSiteLoader();
+
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('[data-header]');
   const menuButton = document.querySelector('[data-menu-button]');
@@ -22,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }));
 
+  document.documentElement.classList.add('fc-js');
   const reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => {
@@ -61,15 +94,66 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const track = document.querySelector('[data-carousel]');
-  if (track) {
-    track.innerHTML += track.innerHTML;
-    track.addEventListener('mouseenter', () => track.classList.add('is-paused'));
-    track.addEventListener('mouseleave', () => track.classList.remove('is-paused'));
+  const cards = track ? Array.from(track.querySelectorAll('.work-card')) : [];
+  const controls = document.querySelector('[data-carousel-controls]');
+  if (track && controls && cards.length > 1) {
+    const count = controls.querySelector('[data-carousel-count]');
+    const pause = controls.querySelector('[data-carousel-pause]');
+    const shell = track.closest('.carousel-shell');
+    let paused = reducedMotion;
+    let current = 0;
+    let pending = false;
+
+    function updateCarousel() {
+      const left = track.getBoundingClientRect().left;
+      current = cards.reduce((nearest, card, index) =>
+        Math.abs(card.getBoundingClientRect().left - left) < Math.abs(cards[nearest].getBoundingClientRect().left - left) ? index : nearest, 0);
+      count.textContent = String(current + 1).padStart(2, '0') + ' / ' + cards.length;
+      pending = false;
+    }
+
+    function step(direction) {
+      const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+      const atStart = track.scrollLeft <= 2;
+      const wraps = (direction > 0 && atEnd) || (direction < 0 && atStart);
+      const index = wraps ? (atEnd ? 0 : cards.length - 1) : Math.max(0, Math.min(cards.length - 1, current + direction));
+      track.scrollTo({ left: cards[index].offsetLeft, behavior: wraps || reducedMotion ? 'instant' : 'smooth' });
+    }
+
+    function updatePause() {
+      const label = paused ? 'Reanudar avance automático' : 'Pausar avance automático';
+      pause.textContent = paused ? '▶' : 'Ⅱ';
+      pause.setAttribute('aria-label', label);
+      pause.title = label;
+    }
+
+    controls.hidden = false;
+    updateCarousel();
+    updatePause();
+    track.addEventListener('scroll', () => {
+      if (!pending) {
+        pending = true;
+        requestAnimationFrame(updateCarousel);
+      }
+    }, { passive: true });
+    window.addEventListener('resize', updateCarousel);
+    controls.querySelector('[data-carousel-prev]').addEventListener('click', () => step(-1));
+    controls.querySelector('[data-carousel-next]').addEventListener('click', () => step(1));
+    pause.addEventListener('click', () => {
+      paused = !paused;
+      updatePause();
+    });
+    setInterval(() => {
+      const box = shell.getBoundingClientRect();
+      if (!paused && !document.hidden && box.bottom > 0 && box.top < innerHeight
+        && !shell.matches(':hover, :focus-within') && !controls.matches(':focus-within')
+        && !document.querySelector('dialog[open]')) step(1);
+    }, 5600);
   }
 
   const modal = document.querySelector('[data-lightbox-modal]');
   if (modal && track) {
-    const originalCards = [...track.querySelectorAll('.work-card')].slice(0, 7);
+    const originalCards = cards;
     const modalImage = modal.querySelector('[data-lightbox-image]');
     const modalCaption = modal.querySelector('[data-lightbox-caption]');
     let currentIndex = 0;
@@ -92,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
       card.tabIndex = 0;
       card.setAttribute('role', 'button');
       card.setAttribute('aria-label', `Ampliar ${card.querySelector('img').alt}`);
-      card.addEventListener('pointerdown', () => track.classList.add('is-paused'));
       card.addEventListener('click', () => openModal(card));
       card.addEventListener('keydown', event => {
         if (event.key === 'Enter' || event.key === ' ') {

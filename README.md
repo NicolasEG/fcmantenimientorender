@@ -6,7 +6,7 @@ Proyecto estático compuesto por tres páginas:
 - `servicios.html`: detalle de servicios.
 - `contacto.html`: formulario de contacto visual.
 
-Para verlo, abrí `index.html` en un navegador. La imagen del bloque parallax se carga desde Unsplash; el resto de los recursos está incluido en `assets/images`.
+Para verlo, abrí `index.html` en un navegador. Las fotos y el video están incluidos en `assets/images` y `assets/videos`.
 
 El formulario funciona como demostración visual. Para recibir consultas debe conectarse a un servicio de formularios, correo o WhatsApp.
 

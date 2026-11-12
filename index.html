@@ -8,8 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="stylesheet" href="styles.css?v=2">
+  <script src="script.js?v=2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido</a>
@@ -42,7 +43,7 @@
       <div class="intro-grid">
         <h1 class="display reveal">La calidez de la madera.<br><em>El oficio que permanece.</em></h1>
         <div class="intro-copy reveal">
-          <p>Diseñamos, construimos y renovamos exteriores con una mirada integral. Cada deck, pérgola y espacio verde nace del entorno y se resuelve con precisión.</p>
+          <p>Diseñamos, construimos y renovamos exteriores en madera. Hacemos decks con bancos integrados, pérgolas con cubierta traslúcida y cerramientos a medida para que cada espacio se adapte a su uso.</p>
           <a class="text-link" href="servicios.html">Conocé nuestros servicios <span>↗</span></a>
         </div>
       </div>
@@ -68,8 +69,34 @@
 
     <section class="work-section section" id="trabajos">
       <div class="section-heading reveal"><div><span class="eyebrow">Obras seleccionadas</span><h2>Trabajos con identidad</h2></div><a class="text-link" href="contacto.html">Empezar un proyecto <span>↗</span></a></div>
+      <div class="carousel-controls" data-carousel-controls hidden>
+        <span class="carousel-count" data-carousel-count></span>
+        <div class="carousel-buttons">
+          <button type="button" data-carousel-pause aria-label="Pausar avance automático" title="Pausar avance automático">Ⅱ</button>
+          <button type="button" data-carousel-prev aria-label="Trabajo anterior">←</button>
+          <button type="button" data-carousel-next aria-label="Trabajo siguiente">→</button>
+        </div>
+      </div>
       <div class="carousel-shell reveal" aria-label="Carrusel de trabajos realizados">
         <div class="carousel-track" data-carousel>
+          <figure class="work-card"><img src="assets/images/obras/obra-01.jpg" alt="Banco de madera integrado en un deck" loading="lazy" decoding="async"><figcaption><strong>Banco integrado al deck</strong><span>Decks</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-11.jpg" alt="Estructura de postes y vigas de madera" loading="lazy" decoding="async"><figcaption><strong>Estructura de madera</strong><span>Pérgolas</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-12.jpg" alt="Tablas verticales de madera junto al césped" loading="lazy" decoding="async"><figcaption><strong>Cerramiento de jardín</strong><span>Cerramientos</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-15.jpg" alt="Lateral de madera de un deck elevado junto a una escalera" loading="lazy" decoding="async"><figcaption><strong>Deck elevado</strong><span>Decks</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-06.jpg" alt="Vigas de madera y cubierta traslúcida vistas desde abajo" loading="lazy" decoding="async"><figcaption><strong>Cubierta traslúcida</strong><span>Pérgolas</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-03.jpg" alt="Portón de madera con herrajes oscuros" loading="lazy" decoding="async"><figcaption><strong>Portón de tablas</strong><span>Cerramientos</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-17.jpg" alt="Vista frontal del mobiliario y la mesada" loading="lazy" decoding="async"><figcaption><strong>Detalles de cocina</strong><span>Interiores</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-04.jpg" alt="Deck de madera frente a puertas vidriadas" loading="lazy" decoding="async"><figcaption><strong>Terraza de madera</strong><span>Decks</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-18.jpg" alt="Vista de una pérgola independiente desde el jardín" loading="lazy" decoding="async"><figcaption><strong>Pérgola a medida</strong><span>Estructuras</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-07.jpg" alt="Galería adosada con cubierta traslúcida" loading="lazy" decoding="async"><figcaption><strong>Galería cubierta</strong><span>Pérgolas</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-14.jpg" alt="Cerco de tablas a distintas alturas junto a un sendero" loading="lazy" decoding="async"><figcaption><strong>Cerco de madera</strong><span>Cerramientos</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-02.jpg" alt="Entablonado junto a las aberturas de una vivienda" loading="lazy" decoding="async"><figcaption><strong>Encuentro con la vivienda</strong><span>Decks</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-08.jpg" alt="Galería de madera junto a una fachada" loading="lazy" decoding="async"><figcaption><strong>Galería lateral</strong><span>Pérgolas</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-13.jpg" alt="Cerramiento de madera junto a plantas y una vivienda" loading="lazy" decoding="async"><figcaption><strong>Cerramiento y canteros</strong><span>Cerramientos</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-16.jpg" alt="Muebles y mesada de una cocina" loading="lazy" decoding="async"><figcaption><strong>Mobiliario de cocina</strong><span>Interiores</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-05.jpg" alt="Pérgola de madera junto a un solado exterior" loading="lazy" decoding="async"><figcaption><strong>Pérgola independiente</strong><span>Estructuras</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-09.jpg" alt="Detalle de los apoyos y las vigas de una cubierta" loading="lazy" decoding="async"><figcaption><strong>Detalle de cubierta</strong><span>Pérgolas</span></figcaption></figure>
+          <figure class="work-card"><img src="assets/images/obras/obra-10.jpg" alt="Pérgola independiente junto a un jardín" loading="lazy" decoding="async"><figcaption><strong>Pérgola en el jardín</strong><span>Estructuras</span></figcaption></figure>
           <figure class="work-card"><img src="assets/images/trabajo-1.png" alt="Deck curvo y banco de madera en terraza" loading="lazy"><figcaption><strong>Deck a medida</strong><span>Diseño integral</span></figcaption></figure>
           <figure class="work-card"><img src="assets/images/trabajo-2.png" alt="Deck de madera alrededor de una piscina" loading="lazy"><figcaption><strong>Entorno de piscina</strong><span>Deck exterior</span></figcaption></figure>
           <figure class="work-card"><img src="assets/images/trabajo-3.png" alt="Pérgola de madera construida junto a una casa" loading="lazy"><figcaption><strong>Pérgola elevada</strong><span>Estructura a medida</span></figcaption></figure>
@@ -79,7 +106,21 @@
           <figure class="work-card"><img src="assets/images/trabajo-7.png" alt="Fogonero con bancos de madera en un jardín" loading="lazy"><figcaption><strong>Rincón de fuego</strong><span>Mobiliario exterior</span></figcaption></figure>
         </div>
       </div>
-      <p class="carousel-note">El carrusel se detiene al pasar el cursor. Hacé clic en una imagen para ampliarla.</p>
+      <p class="carousel-note">Deslizá para recorrer los trabajos. Tocá una foto para ampliarla.</p>
+    </section>
+
+    <section class="work-video section dark-section" aria-labelledby="video-obra">
+      <div class="work-video-copy reveal">
+        <span class="eyebrow light">Video de obra</span>
+        <h2 id="video-obra">Un deck con banco integrado</h2>
+        <p>Un recorrido por el entablonado, los escalones y el banco de madera que forma parte del deck.</p>
+      </div>
+      <figure class="work-video-player reveal">
+        <video controls playsinline preload="none" width="464" height="832" poster="assets/images/obras/obra-01.jpg" aria-label="Recorrido por el deck y su banco integrado">
+          <source src="assets/videos/deck-en-obra.mp4" type="video/mp4">
+          <a href="assets/videos/deck-en-obra.mp4">Abrir el video del deck</a>
+        </video>
+      </figure>
     </section>
 
     <section class="process section sand-section">
